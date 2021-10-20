@@ -75,8 +75,12 @@ public class TcpServer {
             clientSentence = inFromClient.readLine();
             String[] clientArray = clientSentence.split("/%");
 
+            //Confirming connection
+            if (clientArray[0].startsWith("probe")) {
+                returnSentence = "connected";
+            }
             //Make sure user logs in first
-            if (!loggedIn && clientArray[0].equals("login")) {
+            else if (!loggedIn && clientArray[0].equals("login")) {
                 if (userDB.getAllUsers().containsKey(clientArray[1])) {
                     user = userDB.login(clientArray[1], clientArray[2]);
                     if (null != user) {

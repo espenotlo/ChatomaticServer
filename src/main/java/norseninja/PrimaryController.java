@@ -212,6 +212,9 @@ public class PrimaryController {
 
         button1.setOnAction(e -> addUserButtonClicked());
         button2.setOnAction(e -> editUserButtonClicked());
+
+        button1.setDisable(false);
+        button2.setDisable(false);
     }
 
     @FXML
@@ -220,9 +223,11 @@ public class PrimaryController {
 
         button1.setText("New Message");
         button2.setText("Edit Message");
-        button3.setText("Delete Message");
 
         button1.setOnAction(e -> addMessageButtonClicked());
         button2.setOnAction(e -> editMessageButtonClicked());
+
+        button1.setDisable(true);
+        button2.setDisable(true);
     }
 }
