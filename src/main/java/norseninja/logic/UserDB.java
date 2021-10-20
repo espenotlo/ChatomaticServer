@@ -65,6 +65,26 @@ public class UserDB {
         return returnUser;
     }
 
+    /**
+     * Searches for a user by user name.
+     * @param name the username to find.
+     * @return {@code User} found user, or {@code NULL} if no user is found.
+     */
+    public User getUserByUserName(String name) {
+        User returnUser = null;
+        Iterator<User> it = users.values().iterator();
+        boolean searching = true;
+        while (it.hasNext() && searching) {
+            User u = it.next();
+            if (u.getUsername().equals(name)) {
+                returnUser = u;
+                searching = false;
+            }
+        }
+        return returnUser;
+    }
+
+
     public boolean editUsername(String oldUsername, String newUsername) {
         User user = this.users.get(oldUsername);
         if (null != user && !usernameAvailable(newUsername)) {

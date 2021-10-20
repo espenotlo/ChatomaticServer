@@ -194,10 +194,17 @@ public class TcpServer {
         } else {
             messages = this.messageDB.getAllToOrFromUser(user);
         }
-        messages.forEach(message -> sb.append("/%").append(message.getTimeStamp())
-                .append("/%").append(message.getFromUser())
-                .append("/%").append(message.getToUser())
-                .append("/%").append(message.getMessageText()));
+        messages.forEach(message -> {
+            sb.append("/%").append(message.getTimeStamp())
+                    .append("/%").append(userDB.getUserByUserName(message.getFromUser()).getDisplayName()).append("/%");
+            User toUser = userDB.getUserByUserName(message.getToUser());
+            if (null != toUser) {
+                sb.append(userDB.getUserByUserName(message.getToUser()).getDisplayName());
+            } else {
+                sb.append("all");
+            }
+                sb.append("/%").append(message.getMessageText());
+        });
         return sb.toString();
     }
 }
